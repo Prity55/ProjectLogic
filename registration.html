@@ -1,0 +1,237 @@
+<html>
+<head>
+	<link href="https://fonts.google.com/?category=Monospace" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+<title>registration page</title>
+<style>
+	.white-text{
+		          color:white; font-size:20px;
+	           }
+</style>
+<script type="text/javascript">
+	function check_pwd(pwd)
+	{
+		if(pwd.value=="")
+			document.getElementById("P_error").innerHTML="plz fill the value";
+		else if(pwd.value.length<8)
+		{
+			document.getElementById("P_error").innerHTML="plz give long password atlest having 8 character";
+			pwd.value="";
+		}
+		else 
+			document.getElementById("P_error").innerHTML="";
+			return(true);
+	}
+</script>
+<script type="text/javascript">
+	function re_Check_pwd(rePwd)
+	{
+		var re=rePwd.value;
+		var pwd1=document.getElementById('pwd').value;
+		if(re=="")
+			document.getElementById("r_error").innerHTML="plz fill the value";
+		
+		else if(re!=pwd1)
+		{
+			document.getElementById("r_error").innerHTML="plz fill the same Password";
+			rePwd="";	
+		}
+		else
+			document.getElementById("r_error").innerHTML="";
+		    return(true);   
+	}
+</script>
+<script type="text/javascript">
+function check_mob(mob)
+{
+	var mobile=mob.value;
+	let myreg=/^\d*$/gi;
+	var ccode=mobile.substr(0,3);
+	var mob=mobile.substr(3,13).toString();
+	var f=myreg.test(mob);
+	if(ccode="+91" && mobile.length==13)
+	{
+		if(f==false)
+		{
+				document.getElementById("m_error").innerHTML="plz fill the correct mobile number with country code";
+		    mob.value="";
+		    return(false);
+		}
+		else
+		{
+				document.getElementById("m_error").innerHTML="";
+		    mob.value=mobile;
+		    return(true);
+		}	
+	}
+	else
+	{
+			document.getElementById("m_error").innerHTML="plz fill the correct mobile number with country code";
+			mob.value="";
+			return(false);
+	}
+}
+</script>
+</head>
+<body>
+<script type="text/javascript">
+function check_name2(nm1,t)
+	{
+		str=nm1.value;
+		if(str=="")
+		{
+			if(t==1)
+				document.getElementById("error").innerHTML="plz fill the value";
+			if(t==2)
+				document.getElementById("l_error").innerHTML="plz fill the value";
+		}			
+		else
+		{
+
+			var regex=/^[a-zA-Z]*$/gi                                                                                           ;
+			var f=regex.test(str);
+			if(f==true)
+			{
+	  		document.getElementById('l_error').innerHTML="";
+	  		document.getElementById('error').innerHTML="";
+			}	
+			else
+			{
+				nm1.value="";
+				if(t==1)
+					document.getElementById("error").innerHTML="error in name";
+				else if(t==2)
+		  		document.getElementById('l_error').innerHTML="error in name";
+			}	
+ 	  }
+  }
+
+	function check_adrs(adrs)
+	{
+		var adrs1=adrs.value;
+		if(adrs1=="")
+		{
+			document.getElementById("A_error").innerHTML="plz fill the value";
+			return false;
+		}
+		else
+		{
+			document.getElementById("A_error").innerHTML="";
+			return true;
+		}
+	 }
+	 var form=document.getElementById('reg');
+	 function checkAll(e)
+	 {
+			debugger
+			var first1=document.getElementById('first').value;
+			var last=document.getElementById('Last').value;
+			var Email=document.getElementById('email').value;
+			var pwd1=document.getElementById('pwd').value;
+			var rePwd1=document.getElementById('rePwd').value;
+			var mob1=document.getElementById('mob').value;
+			var adrs1 =document.getElementById('adrs').value;
+
+			if(first1=='')
+						check_name2(first,1);
+			if(last=='')
+						check_name2(Last,2)		
+			if(Email=='')
+					  checkEmail(email);				
+			if(pwd1=='')
+						check_pwd(pwd);
+			if(rePwd1=='')
+				    re_Check_pwd(rePwd);
+			if(mob1=='')
+				    check_mob(mob);			
+			if(adrs1=='')
+						check_adrs(adrs);
+			if(first1!='' && last!='' && Email!='' && pwd1!='' && rePwd1!='' && mob1!='' && adrs1!='')
+			{
+					document.getElementById('reg').onsubmit = function(){
+                     // After doing your logic that you want to do 
+
+	                     return true; 
+                 }
+			}
+			else
+					{
+					  //e.preventDefault();
+					  document.getElementById('reg').onsubmit = function(){
+                     // After doing your logic that you want to do 
+
+                     return false; 
+                 }
+					}
+		}
+
+		function checkEmail(email1)
+		{ var em=email1.value; 
+			var reg=/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+			var f=reg.test(em);
+			if(em=="")
+			{
+				document.getElementById("E_error").innerHTML="plz fill the value";
+				return true;
+			}
+			if(f==true)
+			
+			{
+				document.getElementById("E_error").innerHTML="";
+				return false;
+			}
+			else
+			{
+				document.getElementById("E_error").innerHTML="plz fill valid email";
+				return false;
+			}
+		}
+		
+	</script>
+	<!--<script type="text/javascript">
+             window.onload = function(){
+                
+                 document.getElementById('reg').onsubmit = function(){
+                     // After doing your logic that you want to do 
+
+                     return false 
+                 }
+             }
+  </script>-->
+<div class="login-box">
+<!--<form name="reg" action="myFirstPage.html"  id="reg" onsubmit="return false">-->
+	<form name="reg" action="myFirstPage.html"  id="reg" >
+<h1><center>Registration Page</center></h1>
+<table align="center">
+<tr><td><label>First Name</label>
+</td><td></td>
+<td><input type="text" name="first" id="first" placeholder="enter first name" onblur="check_name2(document.reg.first,1)"></td><td id="error" name="error" class="white-text"></td></tr>
+<tr><td><label>Last Name</label></td>
+<td></td><td><input type="text" name="Last" id="Last" placeholder="enter last Name" onblur="check_name2(document.reg.Last,2)"></td><td id="l_error" class="white-text"></td></tr>
+<tr><td><label>Email</label></td>
+<td></td>
+<td><input type="email" name="email" id="email" placeholder="enter Email" onblur="checkEmail(document.reg.email)"></td><td id="E_error" class="white-text"></td></tr>
+<tr><td><label>Password</label></td>
+<td></td><td><input type="password" name="pwd" id="pwd" placeholder="Password" onblur="check_pwd(document.reg.pwd)"></td><td id="P_error" class="white-text"></td></tr>
+<tr><td><label>Confirm password</label><td></td>
+<td><input type="password" name="rePwd" id="rePwd" placeholder="reenter Password" onblur="re_Check_pwd(document.reg.rePwd)"></td></td><td id="r_error" class="white-text"></td></tr>
+<tr><td><label>Mobile Number</label><td></td>
+<td><input type="text" name="mob" id="mob" placeholder="Mobile Number" onblur="check_mob(document.reg.mob)"></td></td><td id="m_error" class="white-text"></td></tr>
+<tr><td><label>Address</label></td><td></td>
+<td><input type="text" name="adrs" id="adrs" placeholder="enter address" onblur="check_adrs(document.reg.adrs)"></td><td id="A_error" class="white-text"></td></tr>
+<tr><td><label>gender</label></td>
+<td colspan="3"><input type="radio" name="gender" checked><label>Male</label>
+<input type="radio" name="gender"><label>Female</label>
+<input type="radio" name="gender"><label>other</label></td>
+</tr>
+<tr>
+<td colspan="4">
+<button type="submit" name="submit" onclick="checkAll()">submit</button>
+</td>
+</tr>
+</table>
+</form>
+</div>
+</body>
+</html>

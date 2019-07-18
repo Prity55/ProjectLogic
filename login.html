@@ -1,0 +1,118 @@
+<html>
+<head>
+	<link href="https://fonts.google.com/?category=Monospace" rel="stylesheet" type="text/css"> 
+<style>
+.white-text{
+	color:white; font-size:20px;
+}
+h1
+{
+	font-family: Monospace;
+}
+	
+</style>
+
+
+<script language="javascript">
+function checkAll()
+		{
+			var Email=document.getElementById('email').value;
+			var pwd1=document.getElementById('Password').value;
+			if(Email=='')
+				check_email();
+			if(pwd1=='')
+				check_pwd(pwd);
+			else
+				document.getElementById("error").innerHTML="";
+			if(Email!=''&& pwd1!=''){
+					document.getElementById('reg').onsubmit = function(){
+                     return true;
+                     } 
+			}
+			else{
+					document.getElementById('reg').onsubmit=function(){
+					 return false;
+				}
+			}
+		}
+	</script>
+	<script type="text/javascript">
+function check_email(email1)
+		{   
+			var em=email1.value; 
+			var reg=/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+			var f=reg.test(em);
+			if(em=="")
+			{
+				document.getElementById("E_error").innerHTML="plz fill the value";
+				return true;
+			}
+			if(f==true)
+			
+			{
+				document.getElementById("E_error").innerHTML="";
+				return false;
+			}
+			else
+			{
+				document.getElementById("E_error").innerHTML="plz fill valid email";
+				return false;
+			}
+		}
+
+		function check_password(pwd)
+	{
+		debugger
+		if(pwd.value=="")
+		{
+			document.getElementById("error").innerHTML="plz fill the value";
+			return false;
+		}
+		else if(pwd.value.length<8)
+		{
+			document.getElementById("error").innerHTML="plz give long password atlest having 8 character";
+			pwd.value="";
+		}
+		else 
+		{
+			document.getElementById("error").innerHTML="";
+			return true;
+		}
+	}
+
+</script>
+	 
+<title>login page</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="login-box">
+	<h1 class="white-text"><center> Login form</center></h1>
+	<form action="" name="login" id="login">
+<table align="center">
+<tr><td><label class="white-text">Email</label></td>
+	<td></td>
+<td><input type="email" id="email" name="email" placeholder="enter email" onblur="check_email(document.login.email)"></td><td id="E_error" class="white-text"></td>
+</tr>
+<br>
+<br>
+<tr>
+<td><label class="white-text">Password</label></td>
+<td></td>
+<td><input type="Password" id="Password" name="Password" placeholder="enter Password" onblur="check_password(document.login.Password)"></td><td id="error" class="white-text"></td>
+</tr>
+<tr>
+	<td colspan="4" >
+		<button type="submit" name="login" id="login" onclick="checkAll()">login</button>
+	</td>
+</tr>
+<tr>
+<td colspan="3"><a href="registration.html">New User</a>
+</td>
+</tr>
+</table>
+</form>
+<div>
+
+</body>
+</html>

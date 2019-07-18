@@ -1,0 +1,274 @@
+<html>
+<head>
+	<link href="https://fonts.google.com/?category=Monospace" rel="stylesheet" type="text/css"> 
+	<link rel="stylesheet" type="text/css" href="style.css">
+<style>
+.white-text{
+	color:white; font-size:20px;
+}
+h1
+{
+	font-family: Monospace;
+}
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+    function check_name(element){
+    	
+	  	 if($(element).val()==""){
+		  	if($(element).data("identity")=="first")
+				      $("#error").html("plz fill the value");
+			  else if($(element).data("identity")=="last")
+				      $("#l_error").html("plz fill the value");
+			}			
+		   else{			
+			     var regex=/^[a-zA-Z]*$/gi;                                                                                        
+			     var f=regex.test($(element).val());
+			     
+			     if($(element).data("identity")=="first"){
+	  		   	if(f==true){
+	  					$('#error').html("");
+	  		   	}
+	  				else{
+	  						$(element).val("");
+			    			$("#error").html("error in name");
+	  				}
+	  			}	
+					else{	
+								if(f==true){
+				   			$('#l_error').html("");
+			   			}
+			    else{
+				        $(element).val()="";
+				        $('#l_error').html("error in name");
+			        }
+ 	        }
+     }
+ }
+
+function check_email(){
+   		var reg=/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+	  	
+		  var f=reg.test($('#email').val());
+		  if($('#email').val()=='')
+		  {
+			  $('#E_error').html("plz fill the value");
+			  return true;
+		  }
+		  else if(f==false)
+		  {
+		  	$('#email').val("");
+			  $('#E_error').html("plz fill correct email address");
+			  return false;
+		  }
+		  else
+		  {
+
+		  	$('#E_error').html("");
+
+			  return false;
+		  }
+}
+function check_pwd()
+{
+  	if($('#pwd').val()=='')
+	  {
+		 $('#P_error').html("plz fill the value");
+		 return false;
+	  }
+	  else if($('#pwd').val()<8)
+		{
+	 	 $('#P_error').html("plz give long password atlest having 8 character");
+		 return false;
+		}
+		else
+		{
+		 $('#P_error').html("");
+		 return true;	
+		}
+}
+function re_check_pwd()
+{
+  	var rePwd=$('#rePwd').val();
+		if($('#rePwd').val()==""){
+			$("#r_error").html("plz fill the value");
+			return false;
+			}
+		else if($('#rePwd').val()!=$('#pwd').val()){
+			$("#r_error").html("plz fill the same Password");
+			$('#rePwd').val("");	
+			return false;
+			}
+		else{
+			$("#r_error").html("");
+		  return(true);
+			}
+}
+function check_mob()
+{
+			var mobile=$('#mob').val();
+			let myreg=/^\d*$/gi;
+			var ccode=mobile.substr(0,3);
+			var mob=mobile.substr(3,13);
+			var f=myreg.test(mob);
+			if(ccode="+91" && mobile.length==13)
+			{
+		  	if(f==false)
+		  	{
+					$("#m_error").html("plz fill the correct mobile number with country code");
+		   	  $('#mob').val("");
+		    	return(false);
+		  	}
+		  	else
+				{
+					$("#m_error").html("");
+		    	$('#mob').val()=mobile;
+		    	return(true);
+				}	
+			}
+			else
+			{
+				$("#m_error").html("plz fill the value");
+				mob.value="";
+				return(false);
+			}
+}
+function check_adrs()
+{
+	if($('#adrs').val()=="")
+			{
+				$("#A_error").html("plz fill the value");
+				return false;
+			}
+			else
+			{
+				$("#A_error").html="";
+				return true;
+			}
+}
+$('#first').blur(function(){
+			
+			var first= $('#first').val();
+			check_name(this);
+	});
+$('#Last').blur(function(){
+			
+			var last=$('#Last').val();
+			check_name(this);
+	});
+
+	$('#email').blur(function(){
+			check_email();
+	});
+
+	$('#pwd').blur(function(){
+			check_pwd();		
+	});
+
+	$('#rePwd').blur(function(){
+			re_check_pwd();				
+	});
+
+	$('#mob').blur(function(){
+			check_mob();		
+ 	});
+	$('#adrs').blur(function(){
+			check_adrs();
+	});
+	
+	$('#reg').on("submit",function(e){
+			
+		  if($('#first').val()=='')
+					check_name('#first');
+		  if($('#Last').val()=="")
+		  		check_name($('#Last'));
+		  if($('#email').val()=='')
+		  		check_email();
+		  if($('#pwd').val()=='')
+					check_pwd();
+			if($('#rePwd').val()=='')
+					re_check_pwd();
+			if($('#mob').val()=='')
+					check_mob();
+			if($('#adrs').val()=='')
+					check_adrs();
+			if($('#first').val()!='' && $('#Last').val()!='' && $('#email').val()!='' && $('#pwd').val()!='' && $('#rePwd').val()!='' && $('#mob').val()!='' && $('#adrs').val()!=''){
+				 return true;
+			}
+			else{
+					    e.preventDefault();
+              return false; 
+          sss}
+	  });
+	});
+</script>
+<div class="login-box">
+<form name="reg" action="myFirstPage.html"  id="reg" >
+  <h1>
+  	<center>Registration Page</center>
+  </h1>
+  <table align="center">
+    <tr>
+    	<td>
+    		<label>First Name</label>
+      </td>
+      <td></td>
+      <td>
+      	<input type="text" name="first" id="first" data-identity="first" placeholder="enter first name"></td><td id="error" name="error" class="white-text"></td>                          
+    </tr>
+    <tr>
+    	<td>
+    		<label>Last Name</label>
+    	</td>
+      <td></td>
+      <td><input type="text" name="Last" id="Last" data-identity="last" placeholder="enter last Name" ></td><td id="l_error" class="white-text"></td>
+    </tr>
+    <tr>
+    	<td>
+    	 <label>Email</label>
+    	</td>
+      <td></td>
+      <td><input type="email" name="email" id="email" placeholder="enter Email" ></td><td id="E_error" class="white-text"></td>
+    </tr>
+    <tr>
+    	<td>
+    		<label>Password</label>
+    	</td>
+      <td></td>
+      <td><input type="password" name="pwd" id="pwd" placeholder="Password" ></td><td id="P_error" class="white-text"></td></tr>
+    <tr>
+    	<td>
+    		<label>Confirm password</label>
+    	</td>
+    	<td></td>
+      <td><input type="password" name="rePwd" id="rePwd" placeholder="reenter Password"></td></td><td id="r_error" class="white-text"></td>
+    </tr>
+    <tr>
+    	<td><label>Mobile Number</label></td>
+    	<td></td>
+      <td><input type="text" name="mob" id="mob" placeholder="Mobile Number"></td></td><td id="m_error" class="white-text"></td>
+    </tr>
+    <tr>
+    	<td><label>Address</label></td><td></td>
+    	<td><input type="text" name="adrs" id="adrs" placeholder="enter address"></td><td id="A_error" class="white-text"></td>
+    </tr>
+    <tr>
+    	<td><label>gender</label></td>
+			<td colspan="3"><input type="radio" name="gender" checked><label>Male</label>
+			<input type="radio" name="gender"><label>Female</label>
+			<input type="radio" name="gender"><label>other</label>
+		</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+			<button type="submit" name="submit" >submit</button>
+			</td>
+		</tr>
+	</table>
+</form>
+</div>
+</body>
+</html>
