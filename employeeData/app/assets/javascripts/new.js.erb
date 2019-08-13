@@ -1,0 +1,101 @@
+ $(document).ready(function(){
+ 	
+ 	function check_name(){
+ 		if($('#name').val()=="")
+ 			$("#error").html("plz fill correct value");
+ 		else{			
+ 			  var regex=/^[a-zA-Z]*$/gi;                                                              
+ 			  var f=regex.test($('#name').val());
+ 			  if(f==true)
+ 	  			$('#error').html("");
+ 	  		  else{
+ 	  				$('#name').val("");
+ 			    	$("#error").html("error in name");
+ 	  				}
+ 	  		}
+ 	}
+ 	function check_salary()
+ 	{
+ 		if($('#salary').val()=="")
+ 			$("#error2").html("plz fill the value");
+ 		else
+ 		{
+ 			var regex=/\d+(\.\d+)?$/
+ 			var f=regex.test($('#salary').val());
+ 			if(f==true)
+ 	  			$('#error2').html("");
+ 	  		else{
+ 	  			   $('#salary').val("");
+ 			       $("#error2").html("plz fill the salary in floating point");
+ 	  			}
+ 	  	}
+ 	}
+ 	function check_post(){
+ 		if($('#designation').val()=="")
+ 			$("#error3").html("plz fill the value");
+ 		else{			
+ 			  var regex=/^[a-zA-Z]*$/gi;                                                              
+ 			  var f=regex.test($('#designation').val());
+ 			  if(f==true)
+ 	  			$('#error3').html("");
+ 	  		  else{
+ 	  				$('#designation').val("");
+ 			    	$("#error3").html("define valid designation");
+ 	  				}
+ 	  		}
+ 	}
+ 	function check_date()
+ 	{
+ 		if($('#DOB').val()=="")
+ 			$("#error1").html("plz fill the value");
+ 		else
+ 			$("#error1").html("");
+ 	// 	else{			
+ 	// 		  var regex=/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;                                                              
+ 	// 		  var f=regex.test($('#DOB').val());
+ 	// 		  if(f==true)
+ 	//   			$('#error1').html("");
+ 	//   		  else{
+ 	//   				$('#DOB').val("");
+ 	// 		    	$("#error1").html("define valid date");
+ 	//   				}
+ 	//   		}
+ 	}
+ 	
+ 	$('#name').blur(function(){
+			
+		check_name();
+	});
+	$('#salary').blur(function(){
+
+		check_salary();
+	});
+
+	$('#designation').blur(function(){
+		check_post();
+	});
+	$('#DOB').blur(function(){
+		check_date();
+	});
+
+ 	$('#reg').on("submit",function(e){		
+ 		  if($('#name').val()=='')
+ 		    check_name();
+  		  if($('#salary').val()=='')
+ 		  	check_salary();
+ 		  if($('#DOB').val()=='')
+ 		  	check_date();
+ 	 		//	$("error1").html("plz fill the value");
+  		  if($('#designation').val()=='')
+ 	 		check_post();
+ 		  if($('#name').val()!='' && $('#DOB').val()!='' && $('#salary').val()!='' && $('#designation').val()!='')
+		  	{
+ 				 return true;
+ 			}
+ 			else{
+ 					    e.preventDefault();
+               return false; 
+	          }
+ 	  });
+
+});
